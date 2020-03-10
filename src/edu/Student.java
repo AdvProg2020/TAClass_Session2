@@ -27,8 +27,20 @@ public class Student {
                 '}';
     }
 
-    public void takeCourse(Course course, String semester) {
-        coursesThisSemester.put(course, new CourseInfo(semester));
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public HashMap<Course, CourseInfo> getCoursesThisSemester() {
+        return coursesThisSemester;
+    }
+
+    public ArrayList<Course> getCoursesPassed() {
+        return coursesPassed;
+    }
+
+    public void takeCourse(Course course) {
+        coursesThisSemester.put(course, new CourseInfo());
     }
 
     public void dropCourse(Course course) {

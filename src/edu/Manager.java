@@ -1,6 +1,7 @@
 package edu;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Manager {
     private String currentSemester;
@@ -16,7 +17,6 @@ public class Manager {
         coursesThisSemester = new ArrayList<>();
         coursesHistory = new ArrayList<>();
     }
-
 
     public ArrayList<Student> getStudents() {
         return students;
@@ -51,4 +51,38 @@ public class Manager {
         }
     }
 
+    public Student getStudentById(String studentId) {
+        for (Student student : students) {
+            if (student.getStudentId().equals(studentId))
+                return student;
+        }
+        return null;
+    }
+
+    public Course getCourseByName(String courseName) {
+        for (Course course : coursesThisSemester) {
+            if (course.getName().equals(courseName))
+                return course;
+        }
+        return null;
+    }
+
+    public Boolean hasCourse(Student student, Course course) {
+        return student.getCoursesThisSemester().containsKey(course);
+    }
+
+    public Boolean takeCourseForStudent(String courseName, String studentId) {
+        Student student = getStudentById(studentId);
+        Course course = getCourseByName(courseName);
+        if(!hasCourse(student, course) && (course.getPreCourses().size() == 0)) {
+            student.takeCourse(course);
+            return true;
+        }
+        return false;
+    }
+
+    public Set<Course> getStudentCoursesThisSemester(String studentId) {
+        Student student = getStudentById(studentId);
+        return student.getCoursesThisSemester().keySet();
+    }
 }

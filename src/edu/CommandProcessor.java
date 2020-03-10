@@ -46,6 +46,19 @@ public class CommandProcessor {
         }
     }
 
+    public void processTakeCourse(String[] splitInput) {
+        if (manager.takeCourseForStudent(splitInput[2], splitInput[3]))
+            System.out.println("Successfully took course!");
+        else
+            System.out.println("Failed to take course!");
+    }
+
+    public void processShowCoursesForStudent(String[] splitInput) {
+        for (Course course : manager.getStudentCoursesThisSemester(splitInput[4])) {
+            System.out.println(course);
+        }
+    }
+
     public void run() {
         String input;
         System.out.println("Enter your command :");
@@ -62,6 +75,10 @@ public class CommandProcessor {
                 processShowProfessors();
             } else if (input.startsWith("show courses this semester")) {
                 processShowThisSemesterCourses();
+            } else if (input.startsWith("take course")) {
+                processTakeCourse(input.split("\\s"));
+            } else if (input.startsWith("show courses for student")) {
+                processShowCoursesForStudent(input.split("\\s"));
             }
             else {
                 System.err.println("invalid command");

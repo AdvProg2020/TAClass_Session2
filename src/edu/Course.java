@@ -4,15 +4,6 @@ import java.util.ArrayList;
 
 class CourseInfo {
     private float mark;
-    private String semester;
-
-    public CourseInfo(String semester) {
-        this.semester = semester;
-    }
-
-    public String getSemester() {
-        return semester;
-    }
 
     public float getMark() {
         return mark;
